@@ -1,0 +1,37 @@
+<script>
+    function toggleDetails(detailsDiv) {
+        if (detailsDiv.classList.contains('open')) {
+            detailsDiv.classList.remove('open');
+        } else {
+            detailsDiv.classList.add('open');
+        }
+    }
+
+    function toggleApproval(button, event, userName) {
+        const disapproveButton = button.parentElement.querySelector('.disapprove');
+        if (button.classList.contains('latched')) {
+            button.classList.remove('latched');
+            alert(userName + " approval removed!");
+        } else {
+            button.classList.add('latched');
+            disapproveButton.classList.remove('latched');
+            alert(userName + " has been approved!");
+        }
+        event.preventDefault();
+        event.stopPropagation(); // Prevent the row from expanding
+    }
+
+    function toggleDisapproval(button, event, userName) {
+        const approveButton = button.parentElement.querySelector('.approve');
+        if (button.classList.contains('latched')) {
+            button.classList.remove('latched');
+            alert(userName + " disapproval removed!");
+        } else {
+            button.classList.add('latched');
+            approveButton.classList.remove('latched');
+            alert(userName + " has been disapproved!");
+        }
+        event.preventDefault();
+        event.stopPropagation(); // Prevent the row from expanding
+    }
+</script>

@@ -1,0 +1,56 @@
+<!-- Paths -->
+<!-- Components -->
+<? const UserRow = 'client/components/UserRow/UserRow_2' ?>
+<? const Loader = 'client/components/Loader/Loader' ?>
+<? const FilterBox = 'client/components/FilterBox/FilterBox' ?>
+
+<!-- CSS -->
+<? const indexCSS = 'client/pages/index-css' ?>
+<? const UserRowCSS = 'client/components/UserRow/UserRow-css' ?>
+<? const LoaderCSS = 'client/components/Loader/Loader-css' ?>
+<? const FilterBoxCSS = 'client/components/FilterBox/FilterBox-css' ?>
+
+<!-- Javascript -->
+<? const indexJS = 'client/pages/index-js' ?>
+<? const UserRowJS = 'client/components/UserRow/UserRow-js' ?>
+<? const LoaderJS = 'client/components/Loader/Loader-js' ?>
+<? const FilterBoxJS = 'client/components/FilterBox/FilterBox-js' ?>
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base target="_top">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?!= _I(indexCSS) ?>
+    <?!= _I(UserRowCSS) ?>
+    <?!= _I(LoaderCSS) ?>
+    <?!= _I(FilterBoxCSS) ?>
+
+</head>
+
+<body>
+    <div class="app-loader">
+        <?!= _I(Loader) ?>
+    </div>
+    <!-- Search Box -->
+    <div class="app">
+        <input type="text" id="search" placeholder="Search by name..." onkeyup="filterUsers()"
+            style="padding: 10px; width: 100%; margin-bottom: 20px; border-radius: 5px; border: 1px solid #ccc;">
+
+            <?!= _I(FilterBox) ?>
+
+        <div id="userContainer">
+            <?!= _I(UserRow,aggregatedObj) ?>
+        </div>
+    </div>
+
+    <?!= _I(indexJS) ?>
+    <?!= _I(UserRowJS) ?>
+    <?!= _I(LoaderJS) ?>
+    <?!= _I(FilterBoxJS) ?>
+</body>
+
+</html>

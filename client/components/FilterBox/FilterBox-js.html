@@ -1,0 +1,34 @@
+<script>
+// Function to toggle the display of filter options
+function toggleFilterOptions() {
+    var filterOptions = document.getElementById('filterOptions');
+    if (filterOptions.style.maxHeight === "0px" || !filterOptions.style.maxHeight) {
+        filterOptions.style.maxHeight = filterOptions.scrollHeight + "px";
+    } else {
+        filterOptions.style.maxHeight = "0px";
+    }
+}
+
+// Function to filter users based on the selected gender
+function filterByGender() {
+    var selectedGender = document.querySelector('input[name="genderFilter"]:checked').value;
+    var userRows = document.querySelectorAll('.userRow');
+    for (var i = 0; i < userRows.length; i++) {
+        var userGender = userRows[i].getAttribute('data-gender');
+        if (selectedGender === "all" || userGender === selectedGender) {
+            userRows[i].style.display = "flex";
+            userRows[i].nextElementSibling.style.display = 'block';
+        } else {
+            userRows[i].style.display = "none";
+            userRows[i].nextElementSibling.style.display = 'none';
+        }
+    }
+}
+
+// Add event listener to gender radio buttons to trigger filtering
+var genderRadios = document.querySelectorAll('input[name="genderFilter"]');
+for (var i = 0; i < genderRadios.length; i++) {
+    genderRadios[i].addEventListener('change', filterByGender);
+}
+
+</script>

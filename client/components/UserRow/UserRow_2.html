@@ -1,0 +1,55 @@
+<? for (let applicant of applicants) { ?>
+    <? const defaultPicURL = "https://drive.google.com/file/d/1kNVWHNlg0gOT6BNQ5jysb1RJJVALULb2/view?usp=sharing" ?>
+    <div class="userRow" onclick="toggleDetails(this.nextElementSibling)" data-gender="<?= applicant.gender ?>">
+        <!-- Checkbox for user selection -->
+        <input type="checkbox" class="userCheckbox">
+        <img src="<?= applicant.photoURL? HELPERS.getGDriveImgByLink(applicant.photoURL) : HELPERS.getGDriveImgByLink(defaultPicURL) ?>"
+            alt="<?= applicant.email ?>">
+        <h3>
+            <?= applicant.fullName? applicant.fullName : applicant.email ?>
+        </h3>
+        <div class="buttons">
+            <button class="approve" onclick="toggleApproval(this, event, '<?= applicant.email ?>')"><i
+                    class="fas fa-thumbs-up"></i></button>
+            <button class="disapprove" onclick="toggleDisapproval(this, event, '<?= applicant.email ?>')"><i
+                    class="fas fa-thumbs-down"></i></button>
+        </div>
+    </div>
+    <div class="details">
+
+    <? Object.entries(applicant).forEach(([param,value])=>{ ?>
+        <? if(param == "" ) return ?>
+        <? if(value == "" ) return ?>
+        <? const mapEntry = map[param] ?>
+        <? if(!mapEntry) return ?>
+        <? const {label, type} = mapEntry ?>
+        <? if(type == "TEXT") {?>
+            <p><strong><?= label ?>:</strong>
+                <?= value ?>
+            </p>
+        <? }else if(type == "PARAGRAPH") {?>
+            <h4><?= label ?>:</h4>
+            <div class="paragraph">
+                <?= value ?>
+            </div>
+        <? }else if(type == "ULIST") {?>
+            <h4><?= label ?>:</h4>
+            <ul>
+                <? for (let element of value) { ?>
+                    <li>   
+                    <? Object.entries(element).forEach(([elementParam,elementValue])=>{ ?>
+                    <? const elementMapEntry = map[elementParam] ?>
+                    <? if(!elementMapEntry) return ?>
+                    <? if(!elementValue) return ?>
+                    <? console.log(elementParam, elementValue, elementMapEntry) ?>
+                    <? const elementLabel = elementMapEntry.label ?>
+                        <strong><?= elementLabel ?>:</strong>
+                        <?= elementValue ?>,
+                    <? }) ?>
+                    </li>
+                <? } ?>
+            </ul>
+        <? } ?>
+    <? }) ?>
+    </div>
+<? } ?>

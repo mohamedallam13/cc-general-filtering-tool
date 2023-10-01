@@ -1,0 +1,51 @@
+<? for (let user of users) { ?>
+<? const defaultPicURL = "https://drive.google.com/file/d/1kNVWHNlg0gOT6BNQ5jysb1RJJVALULb2/view?usp=sharing" ?>
+<div class="userRow" onclick="toggleDetails(this.nextElementSibling)">
+    <img src="<?= user.photoURL? HELPERS.getGDriveImgByLink(user.photoURL) : HELPERS.getGDriveImgByLink(defaultPicURL) ?>"
+        alt="<?= user.name ?>">
+    <h3>
+        <?= user.name ?>
+    </h3>
+    <div class="buttons">
+        <button class="approve" onclick="toggleApproval(this, event, '<?= user.name ?>')"><i
+                class="fas fa-thumbs-up"></i></button>
+        <button class="disapprove" onclick="toggleDisapproval(this, event, '<?= user.name ?>')"><i
+                class="fas fa-thumbs-down"></i></button>
+    </div>
+</div>
+<div class="details">
+    <p><strong>Email:</strong>
+        <?= user.email ?>
+    </p>
+    <p><strong>Gender:</strong>
+        <?= user.gender ?>
+    </p>
+    <!-- ... Other normal data ... -->
+
+    <h4>Past Experience:</h4>
+    <div class="paragraph">
+        <?= user.pastExperience ?>
+    </div>
+
+    <h4>Brief:</h4>
+    <div class="paragraph">
+        <?= user.brief ?>
+    </div>
+
+    <h4>Reasons for Joining:</h4>
+    <div class="paragraph">
+        <?= user.joiningReasons ?>
+    </div>
+
+    <h4>Activities History:</h4>
+    <ul>
+        <? for (let activity of user.activitiesHistory) { ?>
+        <li><strong>Activity:</strong>
+            <?= activity.activity ?>, <strong>Season:</strong>
+            <?= activity.season ?>, <strong>Timestamp:</strong>
+            <?= activity.timestamp ?>
+        </li>
+        <? } ?>
+    </ul>
+</div>
+<? } ?>
